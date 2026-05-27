@@ -1435,6 +1435,56 @@ function PremiumScreen({ onBack, onXP, isPremium, onUnlock }) {
       <h2 style={{ color: "#FFD700", fontSize: 26, fontWeight: 900, marginBottom: 4 }}>⭐ Espace Expert</h2>
       <p style={{ color: COLORS.muted, marginBottom: 20 }}>Ce que les recruteurs ne te diront jamais</p>
 
+      {/* Tableau comparatif — visible par tous */}
+      <div style={{ marginBottom: 24 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+          <span style={{ fontSize: 20 }}>📊</span>
+          <h3 style={{ color: "#FFD700", fontWeight: 500, fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: 20, letterSpacing: 1, margin: 0 }}>Quelle formule est faite pour toi ?</h3>
+        </div>
+        <Card style={{ background: "#FFD70011", borderColor: "#FFD70033", marginBottom: 14 }}>
+          <p style={{ color: "#FFD700", fontSize: 13, fontWeight: 600, margin: 0, lineHeight: 1.6 }}>
+            Compare les deux formules pour choisir celle qui correspond le mieux à ta situation et à tes objectifs.
+          </p>
+        </Card>
+        <Card style={{ padding: 0, overflow: "hidden", marginBottom: 14 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr 1fr", borderBottom: `1px solid ${COLORS.border}` }}>
+            <div style={{ padding: "12px 14px", borderRight: `1px solid ${COLORS.border}` }}>
+              <span style={{ color: COLORS.muted, fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1 }}>Fonctionnalité</span>
+            </div>
+            <div style={{ padding: "12px 14px", borderRight: `1px solid ${COLORS.border}`, textAlign: "center" }}>
+              <div style={{ color: "#FFD700", fontWeight: 800, fontSize: 12 }}>💛 Accès Complet</div>
+              <div style={{ color: COLORS.muted, fontSize: 10 }}>14,99 € unique</div>
+            </div>
+            <div style={{ padding: "12px 14px", textAlign: "center", background: "#C8622A11" }}>
+              <div style={{ color: "#C8622A", fontWeight: 800, fontSize: 12 }}>🟠 Suivi</div>
+              <div style={{ color: COLORS.muted, fontSize: 10 }}>29,99 € / mois</div>
+            </div>
+          </div>
+          {[
+            { label: "Coulisses du recrutement", complet: true, suivi: true },
+            { label: "Grilles d'évaluation recruteur", complet: true, suivi: true },
+            { label: "Checklist préparation entretien", complet: true, suivi: true },
+            { label: "Retour WhatsApp sur ton CV", complet: true, suivi: true },
+            { label: "Vidéos experts 1'30", complet: false, suivi: true },
+            { label: "Coaching one-to-one 45 min/semaine", complet: false, suivi: true },
+            { label: "-10€ sur le 1er mois", complet: false, suivi: true, note: "Si tu viens du plan Accès Complet" },
+          ].map((row, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr 1fr", borderBottom: i < 6 ? `1px solid ${COLORS.border}` : "none" }}>
+              <div style={{ padding: "9px 14px", borderRight: `1px solid ${COLORS.border}`, display: "flex", alignItems: "center" }}>
+                <span style={{ color: COLORS.muted, fontSize: 11, lineHeight: 1.4 }}>{row.label}</span>
+              </div>
+              <div style={{ padding: "9px 14px", borderRight: `1px solid ${COLORS.border}`, textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <span style={{ color: row.complet ? "#00D9A3" : COLORS.border, fontWeight: 900, fontSize: 15 }}>{row.complet ? "✓" : "—"}</span>
+              </div>
+              <div style={{ padding: "9px 14px", textAlign: "center", background: "#C8622A08", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+                <span style={{ color: row.suivi ? "#00D9A3" : COLORS.border, fontWeight: 900, fontSize: 15 }}>{row.suivi ? "✓" : "—"}</span>
+                {row.note && <span style={{ color: "#C8622A", fontSize: 9, fontWeight: 700, marginTop: 2, lineHeight: 1.3 }}>{row.note}</span>}
+              </div>
+            </div>
+          ))}
+        </Card>
+      </div>
+
       {!isPremium ? (
         <div>
           <Card style={{ background: "linear-gradient(135deg, #FFD70011, #FF6B3511)", borderColor: "#FFD70055", marginBottom: 24, textAlign: "center" }}>
