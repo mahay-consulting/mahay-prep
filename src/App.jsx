@@ -29,32 +29,63 @@ const cvTips = [
   { id: 5, title: "Compétences concrètes", desc: "Plutôt que 'dynamique et motivé', cite des réalisations concrètes : chiffres, projets menés, résultats obtenus.", done: false },
 ];
 
-const quizQuestions = [
-  {
-    q: "Quel est le délai idéal pour relancer après l'envoi d'un CV ?",
-    options: ["24h", "1 semaine", "1 mois", "Jamais relancer"],
-    correct: 1,
-    explication: "Une relance après 1 semaine montre ta motivation sans paraître impatient(e)."
-  },
-  {
-    q: "Quelle est la première chose qu'un recruteur regarde sur LinkedIn ?",
-    options: ["Tes diplômes", "Ta photo et ton titre", "Tes recommandations", "Tes centres d'intérêt"],
-    correct: 1,
-    explication: "La photo et le titre sont visibles en premier. Soigne ces deux éléments en priorité."
-  },
-  {
-    q: "Que faire si tu ne connais pas la réponse à une question en entretien ?",
-    options: ["Inventer quelque chose", "Rester silencieux(se)", "Dire honnêtement que tu ne sais pas mais que tu apprendras", "Changer de sujet"],
-    correct: 2,
-    explication: "L'honnêteté et la volonté d'apprendre sont toujours appréciées. Mieux vaut reconnaître une lacune que d'inventer une réponse."
-  },
-  {
-    q: "Combien de CV personnalisés vaut-il mieux envoyer plutôt qu'un seul CV générique ?",
-    options: ["Aucun, un CV générique suffit", "5 CV ciblés", "50 CV identiques", "100 CV génériques"],
-    correct: 1,
-    explication: "Mieux vaut 5 candidatures ciblées et personnalisées que 50 envois en masse, quel que soit ton niveau d'expérience."
-  },
+const niveauxQuiz = [
+  { id: "debutant", label: "Débutant", icon: "🌱", color: "#00D9A3", xp: 50 },
+  { id: "intermediaire", label: "Intermédiaire", icon: "⭐", color: "#FFD700", xp: 80 },
+  { id: "avance", label: "Avancé", icon: "🔥", color: "#FF6B35", xp: 120 },
+  { id: "expert", label: "Expert", icon: "💎", color: "#F472B6", xp: 200 },
 ];
+
+const tousLesQuiz = {
+  debutant: [
+    { q: "Combien de temps un recruteur passe-t-il en moyenne sur un CV ?", options: ["30 secondes", "6 secondes", "2 minutes", "5 minutes"], correct: 1, explication: "Les recruteurs passent en moyenne 6 secondes sur un CV avant de décider de continuer ou pas. La lisibilité et la clarté sont donc primordiales." },
+    { q: "Où doit apparaître ton titre de poste sur un CV ?", options: ["En bas du CV", "Dans la lettre de motivation uniquement", "Juste sous ton nom et prénom", "Dans le bloc compétences"], correct: 2, explication: "Le titre de poste doit apparaître immédiatement sous ton nom. C'est le premier élément que le recruteur lit après ton identité." },
+    { q: "Quel est le délai idéal pour relancer après l'envoi d'un CV ?", options: ["24h", "1 semaine", "1 mois", "Ne jamais relancer"], correct: 1, explication: "Une relance après 1 semaine montre ta motivation sans paraître impatient(e). C'est le bon équilibre entre dynamisme et respect du temps du recruteur." },
+    { q: "Que signifie la méthode STAR en entretien ?", options: ["Sourire, Tenir, Articuler, Respirer", "Situation, Tâche, Action, Résultat", "Savoir, Technique, Aptitude, Réussite", "Stratégie, Talent, Ambition, Réseau"], correct: 1, explication: "STAR signifie Situation, Tâche, Action, Résultat. C'est la méthode recommandée pour structurer tes réponses en entretien avec des exemples concrets." },
+    { q: "Une photo est-elle obligatoire sur un CV ?", options: ["Oui, toujours", "Non, jamais", "Non, et si tu en mets une, elle doit être neutre et professionnelle", "Oui, mais seulement pour les postes en contact client"], correct: 2, explication: "La photo n'est pas obligatoire. Si tu en mets une, elle doit être neutre et professionnelle. Une mauvaise photo nuit plus qu'une absence de photo." },
+    { q: "Combien de pages doit faire un CV pour un profil avec 2 ans d'expérience ?", options: ["1 page maximum", "2 pages", "3 pages", "Autant de pages que nécessaire"], correct: 0, explication: "Pour un profil junior ou avec peu d'expérience, 1 page suffit amplement. Les recruteurs n'ont pas le temps de lire des CV trop longs." },
+    { q: "Qu'est-ce qu'une candidature spontanée ?", options: ["Une candidature envoyée sans CV", "Une candidature envoyée sans qu'il y ait d'offre d'emploi publiée", "Une candidature envoyée en urgence", "Une candidature sans lettre de motivation"], correct: 1, explication: "Une candidature spontanée est envoyée directement à une entreprise sans qu'elle ait publié d'offre. C'est une démarche proactive qui peut ouvrir des portes inattendues." },
+    { q: "Quelle information ne devrait PAS figurer sur un CV ?", options: ["Le permis de conduire", "La situation matrimoniale", "Les habilitations professionnelles", "L'adresse email"], correct: 1, explication: "La situation matrimoniale, la religion, l'origine ou la nationalité ne doivent pas figurer sur un CV. Ces informations ne sont pas pertinentes pour le recrutement et peuvent induire des discriminations." },
+    { q: "Dans quel ordre doit-on présenter ses expériences sur un CV ?", options: ["Du plus ancien au plus récent", "Par ordre alphabétique des entreprises", "Du plus récent au plus ancien", "Par ordre d'importance"], correct: 2, explication: "Les expériences doivent toujours être présentées du plus récent au plus ancien. Le recruteur s'intéresse d'abord à ce que tu fais maintenant." },
+    { q: "Que faire si on ne maîtrise pas une compétence mentionnée dans une offre d'emploi ?", options: ["Ne pas postuler", "Mentir sur son CV", "Postuler quand même si on maîtrise les autres compétences et mentionner sa capacité à apprendre", "Attendre d'avoir la compétence avant de postuler"], correct: 2, explication: "Une offre d'emploi est une liste de souhaits, pas toujours une liste d'exigences absolues. Si tu maîtrises l'essentiel et que tu es capable d'apprendre, postule et sois honnête sur ce que tu ne maîtrises pas encore." },
+  ],
+  intermediaire: [
+    { q: "Qu'est-ce qu'un recruteur évalue en premier pendant les 3 premières minutes d'un entretien ?", options: ["Tes diplômes", "Ta posture, ton élocution et ta présentation générale", "Ton expérience professionnelle", "Tes prétentions salariales"], correct: 1, explication: "Les 3 premières minutes sont décisives. Le recruteur évalue inconsciemment ta posture, ton élocution, ton regard et l'impression générale que tu dégages avant même d'analyser ton parcours." },
+    { q: "Quelle est la meilleure façon de répondre à 'Parlez-moi de vous' en entretien ?", options: ["Réciter ton CV de mémoire", "Parler de ta vie personnelle", "Faire un résumé ciblé de ton parcours en lien avec le poste en 2-3 minutes", "Poser des questions à la place"], correct: 2, explication: "Cette question est une opportunité. Fais un résumé structuré de ton parcours en montrant pourquoi tu es la bonne personne pour CE poste précis. Pas plus de 2-3 minutes." },
+    { q: "Comment interpréter un silence du recruteur après ta réponse ?", options: ["Il n'est pas satisfait de ta réponse", "Il réfléchit ou prend des notes — c'est normal", "Tu dois immédiatement ajouter quelque chose", "L'entretien est terminé"], correct: 1, explication: "Le silence n'est pas forcément négatif. Le recruteur peut simplement noter ou réfléchir. Apprends à gérer le silence sans te précipiter à combler le vide — ça montre ta maturité." },
+    { q: "Quelle est la meilleure réponse si le recruteur demande 'Avez-vous d'autres entretiens en cours ?'", options: ["Non, je n'ai postulé que chez vous", "Oui, j'ai plusieurs processus en cours", "Je préfère ne pas répondre", "Ça dépend de votre offre"], correct: 1, explication: "Dire que tu as d'autres processus en cours montre que tu es un profil recherché sur le marché. Ça valorise ta candidature sans mentir. Ne dis jamais que tu n'as postulé que chez eux." },
+    { q: "Pourquoi un recruteur ne rappelle-t-il pas toujours après un entretien ?", options: ["Par manque de respect", "Parce que le candidat a fait une erreur rédhibitoire", "Par manque de temps, gel du poste ou autre candidat retenu — pas forcément lié au candidat", "Parce que le processus est annulé"], correct: 2, explication: "Le silence post-entretien a rarement une seule raison. Le poste peut avoir été gelé, un candidat interne retenu, ou le recruteur simplement débordé. Ce n'est pas toujours un jugement sur ta valeur." },
+    { q: "Comment se préparer à la question 'Quels sont vos défauts ?'", options: ["Dire qu'on n'en a pas", "Citer un défaut qui est en réalité une qualité (ex: 'je suis trop perfectionniste')", "Citer un vrai défaut et expliquer comment on travaille à l'améliorer", "Refuser de répondre"], correct: 2, explication: "La réponse 'je suis trop perfectionniste' est un cliché transparent que les recruteurs détestent. Mieux vaut citer un vrai axe d'amélioration et montrer ta conscience de soi et ta démarche de progression." },
+    { q: "Qu'est-ce que le 'culture fit' en recrutement ?", options: ["La capacité à parler plusieurs langues", "L'adéquation entre la personnalité du candidat et les valeurs/l'ambiance de l'entreprise", "Les diplômes culturels du candidat", "La capacité à s'adapter à différents pays"], correct: 1, explication: "Le 'culture fit' désigne l'adéquation entre le profil humain du candidat et l'environnement de l'entreprise. C'est souvent le critère décisif entre deux candidats aux compétences équivalentes." },
+    { q: "À quel moment aborder le salaire en entretien ?", options: ["Dès le début pour gagner du temps", "Jamais, c'est au recruteur d'en parler", "Plutôt en fin d'entretien, après avoir montré ta valeur", "Uniquement par email après l'entretien"], correct: 2, explication: "Aborder le salaire après avoir présenté tes compétences et ton intérêt pour le poste te place en position de force. Tu n'es plus juste un candidat, tu es une valeur ajoutée dont le prix se négocie." },
+    { q: "Quelle est l'erreur la plus fréquente sur LinkedIn selon les recruteurs ?", options: ["Avoir trop de contacts", "Ne pas avoir de photo ou avoir un titre trop vague", "Publier trop souvent", "Avoir un profil en anglais"], correct: 1, explication: "L'absence de photo professionnelle et un titre vague ('En recherche d'emploi' ou 'Étudiant') sont les erreurs les plus fréquentes. Le titre LinkedIn doit refléter ton métier et ta valeur ajoutée." },
+    { q: "Combien de candidatures ciblées valent mieux que 100 candidatures génériques ?", options: ["1", "3", "5", "10"], correct: 2, explication: "5 candidatures vraiment ciblées et personnalisées ont plus de chances d'aboutir que 100 envois en masse. La qualité prime sur la quantité, quel que soit le niveau d'expérience." },
+  ],
+  avance: [
+    { q: "Un candidat répond à toutes les questions avec des réponses très construites et très lisses. Qu'est-ce que ça peut indiquer pour un recruteur expérimenté ?", options: ["C'est un excellent candidat très préparé", "Il a peut-être appris des réponses par cœur sans vécu réel", "Il est trop perfectionniste", "Il manque de confiance en lui"], correct: 1, explication: "Un recruteur expérimenté repère les réponses apprises par cœur. La spontanéité et les légères hésitations sur des situations vécues sont souvent plus authentiques et rassurantes que des réponses trop polies." },
+    { q: "Qu'est-ce que la 'lettre de motivation' apporte vraiment par rapport au CV ?", options: ["Elle répète les informations du CV", "Elle montre la motivation réelle, le style de communication et la capacité à cibler sa candidature", "Elle est obligatoire pour tous les postes", "Elle remplace le CV pour certains postes"], correct: 1, explication: "Une bonne lettre de motivation ne répète pas le CV — elle explique POURQUOI ce poste, POURQUOI cette entreprise, et ce que TU vas apporter. C'est l'occasion de montrer ta personnalité et ta capacité à te projeter." },
+    { q: "Qu'est-ce qu'un 'ATS' et pourquoi c'est important pour ton CV ?", options: ["Un type de contrat de travail", "Un logiciel de tri automatique des CV utilisé par les recruteurs", "Une certification professionnelle", "Un réseau social professionnel"], correct: 1, explication: "L'ATS (Applicant Tracking System) est un logiciel qui filtre automatiquement les CV avant qu'un humain ne les lise. Un CV trop graphique, en image ou sans mots-clés peut être éliminé automatiquement. Mieux vaut un CV clair et textuel." },
+    { q: "Comment négocier son salaire sans se dévaloriser ?", options: ["Donner un chiffre précis sans fourchette", "Annoncer une fourchette réaliste basée sur le marché et justifier par son expérience", "Demander le maximum possible pour négocier", "Attendre que l'employeur propose"], correct: 1, explication: "Annoncer une fourchette préparée et justifiée montre ta connaissance du marché. Le bas de ta fourchette doit être ton minimum acceptable. Jamais en dessous, jamais sans justification." },
+    { q: "Qu'est-ce que le 'quiet quitting' et comment l'éviter de donner cette image en entretien ?", options: ["Démissionner sans prévenir", "Faire le strict minimum sans s'investir", "Chercher un emploi en secret", "Refuser les heures supplémentaires"], correct: 1, explication: "Le 'quiet quitting' désigne le fait de se limiter strictement à sa fiche de poste sans aucun investissement supplémentaire. En entretien, montrer des initiatives, des projets personnels ou une implication au-delà du cadre strict rassure le recruteur." },
+    { q: "Pourquoi est-il déconseillé de critiquer son ancien employeur en entretien ?", options: ["Par loyauté envers l'entreprise", "Parce que le recruteur pourrait connaître l'employeur", "Parce que ça donne une image négative de toi et interroge sur ce que tu diras de la nouvelle entreprise", "Parce que c'est illégal"], correct: 2, explication: "Critiquer un ancien employeur retourne toujours contre le candidat. Le recruteur se demande immédiatement : 'Et dans 2 ans, que dira-t-il de nous ?' Formuler les raisons de départ en positif est toujours plus efficace." },
+    { q: "Qu'est-ce qu'une 'période d'essai' implique vraiment pour le candidat ?", options: ["Une période sans salaire", "Une période où les deux parties peuvent rompre le contrat plus facilement", "Une période de formation obligatoire", "Une période sans congés possible"], correct: 1, explication: "La période d'essai permet à l'employeur ET au salarié de mettre fin au contrat plus simplement. Elle protège les deux parties. Sa durée légale dépend du type de contrat et de la convention collective." },
+    { q: "Comment se différencier quand on postule sur un poste très demandé ?", options: ["Envoyer son CV en premier", "Personnaliser sa candidature, montrer sa connaissance de l'entreprise et proposer une valeur ajoutée concrète", "Mettre plus de diplômes sur son CV", "Appeler l'entreprise avant d'envoyer son CV"], correct: 1, explication: "Sur un poste très demandé, la personnalisation fait la différence. Montrer que tu connais l'entreprise, ses enjeux, et ce que TU peux apporter concrètement te place au-dessus de la masse des candidatures génériques." },
+    { q: "Qu'est-ce que le 'réseautage' apporte réellement dans une recherche d'emploi ?", options: ["Un accès direct aux offres publiées", "Un accès au marché caché de l'emploi (70% des postes non publiés)", "Une garantie d'embauche", "Des recommandations automatiques"], correct: 1, explication: "On estime que 70% des postes ne sont jamais publiés — ils sont pourvus par cooptation ou réseau. Le réseautage donne accès à ce marché caché. Un contact qui te recommande vaut souvent mieux qu'une candidature spontanée." },
+    { q: "Quelle est la bonne réaction si un entretien se passe mal ?", options: ["Abandonner la recherche d'emploi temporairement", "Analyser ce qui n'a pas fonctionné et s'en servir pour progresser", "Ne plus postuler dans ce secteur", "Contacter le recruteur pour se justifier"], correct: 1, explication: "Un entretien raté est une source d'apprentissage précieuse. Analyse ce qui a coincé — préparation, posture, réponses — et utilise-le pour t'améliorer. Chaque entretien te prépare au suivant." },
+  ],
+  expert: [
+    { q: "Un candidat a un score parfait sur le CV et une excellente posture. Mais le recruteur ne le retient pas. Quelle est souvent la vraie raison ?", options: ["Le recruteur a fait une erreur", "Le candidat ne correspond pas à la culture de l'entreprise ou aux attentes de l'équipe", "Le salaire demandé est trop élevé", "Le candidat était trop qualifié"], correct: 1, explication: "Le 'culture fit' — l'adéquation entre la personnalité du candidat et l'environnement de l'entreprise — est souvent le facteur décisif quand tout le reste est égal. Un excellent profil dans la mauvaise culture d'entreprise ne fonctionnera pas." },
+    { q: "Qu'est-ce qu'un recruteur évalue vraiment quand il pose une question sur une situation difficile vécue ?", options: ["Si le candidat a connu des échecs", "La capacité du candidat à analyser, tirer des leçons et se remettre en question", "Si le candidat est émotionnellement stable", "La loyauté du candidat envers ses anciens employeurs"], correct: 1, explication: "Les questions sur les difficultés vécues évaluent la maturité professionnelle et la capacité d'apprentissage. Un candidat qui analyse ses erreurs et en tire des leçons concrètes est bien plus rassurant qu'un candidat qui n'a 'jamais eu de problèmes'." },
+    { q: "Quelle est la différence entre une reconversion réussie et une reconversion perçue négativement par un recruteur ?", options: ["Le nombre de formations suivies", "La cohérence du projet et la capacité à expliquer pourquoi ce changement a du sens", "L'âge du candidat", "Le secteur d'origine"], correct: 1, explication: "Une reconversion est toujours questionnée. Ce qui convainc le recruteur, c'est la clarté du projet : pourquoi ce changement, pourquoi maintenant, et en quoi les compétences passées sont transférables au nouveau métier." },
+    { q: "Qu'est-ce qui distingue un candidat 'passif' d'un candidat 'actif' sur le marché de l'emploi ?", options: ["Le candidat actif postule plus que le candidat passif", "Le candidat passif est en poste et ouvert aux opportunités, le candidat actif cherche activement", "Le candidat passif ne répond jamais aux recruteurs", "Le candidat actif accepte n'importe quel poste"], correct: 1, explication: "Un candidat passif est en poste et ouvert aux opportunités sans chercher activement. C'est souvent le profil le plus convoité par les recruteurs car il n'est pas 'en urgence'. Savoir se positionner comme candidat passif même en recherche active est une stratégie efficace." },
+    { q: "Comment un recruteur détecte-t-il qu'un candidat postule en masse sans lire les offres ?", options: ["En regardant le nombre de candidatures reçues", "En posant des questions précises sur l'entreprise ou le poste que le candidat ne peut pas répondre", "En vérifiant son profil LinkedIn", "En demandant combien de candidatures il a envoyé"], correct: 1, explication: "Quelques questions ciblées suffisent : 'Qu'est-ce qui vous a attiré dans NOTRE entreprise ?' ou 'Qu'avez-vous compris du poste ?' Un candidat qui postule en masse ne peut pas répondre précisément. La préparation est immédiatement visible." },
+    { q: "Pourquoi un candidat très qualifié peut-il être écarté au profit d'un profil moins expérimenté ?", options: ["Par discrimination", "Parce qu'il est perçu comme trop cher ou susceptible de repartir rapidement", "Parce que les recruteurs préfèrent les juniors", "Par erreur de jugement"], correct: 1, explication: "Un profil surqualifié génère deux craintes chez le recruteur : le coût salarial et le risque qu'il reparte dès qu'une meilleure opportunité se présente. Pour contrer ça, il faut expliquer clairement pourquoi CE poste a du sens pour soi à ce moment précis." },
+    { q: "Qu'est-ce que la 'cooptation' et pourquoi c'est une stratégie efficace ?", options: ["Une technique de négociation salariale", "Le fait d'être recommandé par un employé de l'entreprise pour un poste", "Une forme de candidature spontanée", "Un type de contrat de travail"], correct: 1, explication: "La cooptation, c'est être recommandé par quelqu'un qui travaille déjà dans l'entreprise. C'est la voie la plus efficace : le candidat arrive avec une caution de confiance, le processus est souvent accéléré, et les chances de succès sont bien supérieures à une candidature classique." },
+    { q: "Qu'est-ce qu'un recruteur pense vraiment quand un candidat dit 'Je m'adapte à tout' ?", options: ["C'est très rassurant", "C'est une réponse floue qui ne dit rien sur les vraies compétences du candidat", "C'est une preuve de flexibilité", "C'est une réponse honnête"], correct: 1, explication: "'Je m'adapte à tout' est l'une des réponses les plus vides de sens en entretien. Elle ne dit rien de concret. Mieux vaut citer une situation précise où tu as su t'adapter rapidement — avec le contexte, ce que tu as fait, et le résultat." },
+    { q: "Quelle est la valeur réelle d'un réseau professionnel solide par rapport aux candidatures en ligne ?", options: ["Le réseau donne accès aux mêmes offres plus rapidement", "Le réseau donne accès au marché caché et génère des recommandations qui multiplient les chances d'embauche", "Le réseau remplace complètement les candidatures en ligne", "Le réseau est utile uniquement pour les postes de cadres"], correct: 1, explication: "Un réseau solide donne accès aux 70% de postes jamais publiés et génère des recommandations qui valent souvent plus qu'un CV parfait. Investir dans son réseau avant d'en avoir besoin est la stratégie la plus efficace sur le long terme." },
+    { q: "Qu'est-ce qui fait qu'un candidat suscite naturellement de la curiosité chez le recruteur ?", options: ["Avoir un CV long et détaillé", "Donner des réponses précises, spontanées et ancrées dans du vécu réel qui ouvrent naturellement sur d'autres questions", "Avoir des diplômes prestigieux", "Parler beaucoup pour montrer son enthousiasme"], correct: 1, explication: "Un candidat qui donne envie de poser d'autres questions est un candidat qui a du fond. La spontanéité, la précision et les exemples concrets créent naturellement de la curiosité. Un candidat dont les réponses sont plates et fermées ne sera probablement pas retenu." },
+  ],
+};
 
 const secteurs = [
   {
@@ -344,108 +375,167 @@ function CVScreen({ onBack, onXP }) {
 }
 
 function QuizScreen({ onBack, onXP }) {
+  const [niveau, setNiveau] = useState(null);
+  const [niveauxDebloques, setNiveauxDebloques] = useState(["debutant"]);
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState(null);
   const [score, setScore] = useState(0);
   const [done, setDone] = useState(false);
-  const [awarded, setAwarded] = useState(false);
+  const [showResult, setShowResult] = useState(false);
 
-  const q = quizQuestions[current];
+  const questions = niveau ? tousLesQuiz[niveau.id] : [];
+  const niveauInfo = niveauxQuiz.find(n => n.id === niveau?.id);
 
   const choose = (i) => {
     if (selected !== null) return;
     setSelected(i);
-    if (i === q.correct) setScore(s => s + 1);
+    if (i === questions[current].correct) setScore(s => s + 1);
   };
 
   const next = () => {
-    if (current + 1 < quizQuestions.length) {
+    if (current + 1 < questions.length) {
       setCurrent(c => c + 1);
       setSelected(null);
     } else {
       setDone(true);
-      if (!awarded) {
-        onXP(score * 25 + 50);
-        setAwarded(true);
+      const pct = Math.round((score + (selected === questions[current].correct ? 1 : 0)) / questions.length * 100);
+      if (pct >= 70) {
+        const niveauxIds = niveauxQuiz.map(n => n.id);
+        const idx = niveauxIds.indexOf(niveau.id);
+        if (idx < niveauxIds.length - 1) {
+          setNiveauxDebloques(prev => [...new Set([...prev, niveauxIds[idx + 1]])]);
+        }
+        onXP(niveauInfo?.xp || 50);
       }
     }
   };
 
-  if (done) return (
+  const finalScore = done ? Math.round((score) / questions.length * 100) : 0;
+  const niveauSuivant = niveau ? niveauxQuiz[niveauxQuiz.findIndex(n => n.id === niveau.id) + 1] : null;
+
+  if (!niveau) return (
     <div>
       <button onClick={onBack} style={{ background: "none", border: "none", color: COLORS.muted, cursor: "pointer", fontSize: 14, marginBottom: 16, fontFamily: "inherit" }}>← Retour</button>
-      <Card style={{ textAlign: "center" }}>
-        <div style={{ fontSize: 56, marginBottom: 12 }}>{score >= 3 ? "🏆" : score >= 2 ? "🌟" : "💪"}</div>
-        <h2 style={{ color: COLORS.accent, fontWeight: 900, marginBottom: 8 }}>
-          {score} / {quizQuestions.length} bonnes réponses
-        </h2>
-        <p style={{ color: COLORS.muted, marginBottom: 20 }}>
-          {score === 4 ? "Parfait ! Tu maîtrises les bases !" : score >= 2 ? "Bien joué, continue comme ça !" : "Continue à apprendre, tu y arriveras !"}
+      <h2 style={{ color: COLORS.accent, fontSize: 30, fontWeight: 500, fontFamily: "'Cormorant Garamond', Georgia, serif", letterSpacing: 1, marginBottom: 4 }}>🧩 Quiz</h2>
+      <p style={{ color: COLORS.muted, marginBottom: 24 }}>Teste tes connaissances — 10 questions par niveau</p>
+      <Card style={{ background: COLORS.accent + "11", borderColor: COLORS.accent + "33", marginBottom: 24 }}>
+        <p style={{ color: COLORS.accent, fontSize: 13, fontWeight: 600, margin: 0 }}>
+          🔓 Débloque les niveaux suivants en obtenant plus de 70% de bonnes réponses. Les questions sont basées sur les coulisses du recrutement de l'experte Mahay Consulting.
         </p>
-        <Badge label={`+${score * 25 + 50} XP gagnés`} color={COLORS.accent} />
-        <div style={{ marginTop: 20 }}>
-          <Btn onClick={onBack}>Retour à l'accueil</Btn>
+      </Card>
+      <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+        {niveauxQuiz.map((n, i) => {
+          const debloque = niveauxDebloques.includes(n.id);
+          return (
+            <div key={n.id}
+              onClick={() => debloque && setNiveau(n)}
+              style={{
+                background: debloque ? COLORS.card : COLORS.card,
+                border: `2px solid ${debloque ? n.color + "66" : COLORS.border}`,
+                borderRadius: 16, padding: "16px 20px",
+                cursor: debloque ? "pointer" : "not-allowed",
+                opacity: debloque ? 1 : 0.5,
+                display: "flex", alignItems: "center", gap: 16,
+              }}>
+              <span style={{ fontSize: 28 }}>{debloque ? n.icon : "🔒"}</span>
+              <div style={{ flex: 1 }}>
+                <div style={{ color: debloque ? n.color : COLORS.muted, fontWeight: 800, fontSize: 16 }}>Niveau {i + 1} — {n.label}</div>
+                <div style={{ color: COLORS.muted, fontSize: 13, marginTop: 2 }}>10 questions · +{n.xp} XP si score ≥ 70%</div>
+              </div>
+              {debloque ? <span style={{ color: n.color, fontSize: 20 }}>→</span> : <span style={{ color: COLORS.muted, fontSize: 13 }}>Score ≥ 70% au niveau précédent</span>}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+
+  if (done) return (
+    <div>
+      <button onClick={() => { setNiveau(null); setCurrent(0); setSelected(null); setScore(0); setDone(false); }} style={{ background: "none", border: "none", color: COLORS.muted, cursor: "pointer", fontSize: 14, marginBottom: 16, fontFamily: "inherit" }}>← Choisir un niveau</button>
+      <Card style={{ textAlign: "center", background: finalScore >= 70 ? "#00D9A322" : "#FF6B3522", borderColor: finalScore >= 70 ? "#00D9A355" : "#FF6B3555" }}>
+        <div style={{ fontSize: 56, marginBottom: 12 }}>{finalScore >= 70 ? niveauInfo?.icon : "💪"}</div>
+        <h2 style={{ color: finalScore >= 70 ? "#00D9A3" : "#FF6B35", fontWeight: 500, fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: 28, letterSpacing: 1, marginBottom: 8 }}>
+          {score} / {questions.length} bonnes réponses
+        </h2>
+        <div style={{ background: COLORS.border, borderRadius: 99, height: 8, maxWidth: 200, margin: "0 auto 12px" }}>
+          <div style={{ width: finalScore + "%", height: "100%", borderRadius: 99, background: finalScore >= 70 ? "#00D9A3" : "#FF6B35" }} />
+        </div>
+        <p style={{ color: COLORS.muted, marginBottom: 16, fontSize: 14 }}>
+          {finalScore >= 70
+            ? `Bravo ! Niveau ${niveauInfo?.label} validé.${niveauSuivant ? ` Le niveau ${niveauSuivant.label} est maintenant débloqué !` : " Tu as atteint le niveau maximum !"}`
+            : `Score insuffisant (${finalScore}%). Il faut 70% pour débloquer le niveau suivant. Réessaie !`}
+        </p>
+        {finalScore >= 70 && <Badge label={`+${niveauInfo?.xp} XP gagnés`} color="#00D9A3" />}
+        <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 20 }}>
+          <Btn onClick={() => { setCurrent(0); setSelected(null); setScore(0); setDone(false); }} color={niveauInfo?.color} style={{ width: "100%" }}>
+            Recommencer ce niveau
+          </Btn>
+          {finalScore >= 70 && niveauSuivant && (
+            <Btn onClick={() => { setNiveau(niveauSuivant); setCurrent(0); setSelected(null); setScore(0); setDone(false); }} color={niveauSuivant.color} style={{ width: "100%" }}>
+              {niveauSuivant.icon} Niveau {niveauSuivant.label} →
+            </Btn>
+          )}
+          <Btn onClick={() => { setNiveau(null); setCurrent(0); setSelected(null); setScore(0); setDone(false); }} color={niveauInfo?.color} secondary style={{ width: "100%" }}>
+            Choisir un autre niveau
+          </Btn>
         </div>
       </Card>
     </div>
   );
 
+  const q = questions[current];
   return (
     <div>
-      <button onClick={onBack} style={{ background: "none", border: "none", color: COLORS.muted, cursor: "pointer", fontSize: 14, marginBottom: 16, fontFamily: "inherit" }}>← Retour</button>
+      <button onClick={() => setNiveau(null)} style={{ background: "none", border: "none", color: COLORS.muted, cursor: "pointer", fontSize: 14, marginBottom: 16, fontFamily: "inherit" }}>← Niveaux</button>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
-        <h2 style={{ color: COLORS.accent, fontSize: 26, fontWeight: 500, fontFamily: "'Cormorant Garamond', Georgia, serif", letterSpacing: 1, margin: 0 }}>🧩 Quiz</h2>
-        <Badge label={`${current + 1}/${quizQuestions.length}`} color={COLORS.accent2} />
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <span style={{ fontSize: 20 }}>{niveauInfo?.icon}</span>
+          <span style={{ color: niveauInfo?.color, fontWeight: 700 }}>{niveauInfo?.label}</span>
+        </div>
+        <Badge label={`${current + 1}/${questions.length}`} color={niveauInfo?.color || COLORS.accent} />
       </div>
-
-      <Card style={{ marginBottom: 20 }}>
-        <p style={{ color: COLORS.text, fontSize: 18, fontWeight: 700, lineHeight: 1.4 }}>{q.q}</p>
+      <div style={{ background: COLORS.border, borderRadius: 99, height: 6, marginBottom: 20 }}>
+        <div style={{ width: `${((current) / questions.length) * 100}%`, height: "100%", borderRadius: 99, background: niveauInfo?.color, transition: "width 0.3s" }} />
+      </div>
+      <Card style={{ marginBottom: 20, borderColor: niveauInfo?.color + "33" }}>
+        <p style={{ color: COLORS.text, fontSize: 17, fontWeight: 700, lineHeight: 1.5, margin: 0 }}>{q.q}</p>
       </Card>
-
       <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 20 }}>
         {q.options.map((opt, i) => {
           const isCorrect = i === q.correct;
           const isSelected = i === selected;
-          let borderColor = COLORS.border;
-          let bg = COLORS.card;
+          let borderColor = COLORS.border, bg = COLORS.card;
           if (selected !== null) {
-            if (isCorrect) { borderColor = COLORS.accent3; bg = COLORS.accent3 + "22"; }
-            else if (isSelected) { borderColor = COLORS.accent2; bg = COLORS.accent2 + "22"; }
+            if (isCorrect) { borderColor = "#00D9A3"; bg = "#00D9A322"; }
+            else if (isSelected) { borderColor = "#FF6B35"; bg = "#FF6B3522"; }
           }
           return (
             <button key={i} onClick={() => choose(i)} style={{
-              background: bg,
-              border: `2px solid ${borderColor}`,
-              borderRadius: 14,
-              padding: "14px 18px",
-              color: COLORS.text,
-              textAlign: "left",
+              background: bg, border: `2px solid ${borderColor}`, borderRadius: 14,
+              padding: "14px 18px", color: COLORS.text, textAlign: "left",
               cursor: selected === null ? "pointer" : "default",
-              fontFamily: "inherit",
-              fontSize: 15,
-              fontWeight: 600,
-              transition: "all 0.3s",
+              fontFamily: "inherit", fontSize: 14, fontWeight: 600, transition: "all 0.3s",
             }}>
               {isSelected && !isCorrect ? "✗ " : isCorrect && selected !== null ? "✓ " : ""}{opt}
             </button>
           );
         })}
       </div>
-
       {selected !== null && (
-        <Card style={{ background: COLORS.accent3 + "11", borderColor: COLORS.accent3 + "55", marginBottom: 16 }}>
-          <p style={{ color: COLORS.accent3, fontWeight: 700, margin: 0 }}>💡 {q.explication}</p>
+        <Card style={{ background: "#00D9A311", borderColor: "#00D9A355", marginBottom: 16 }}>
+          <p style={{ color: "#00D9A3", fontWeight: 700, margin: 0, fontSize: 14, lineHeight: 1.6 }}>💡 {q.explication}</p>
         </Card>
       )}
-
       {selected !== null && (
-        <Btn onClick={next} style={{ width: "100%" }}>
-          {current + 1 < quizQuestions.length ? "Question suivante →" : "Voir mes résultats"}
+        <Btn onClick={next} color={niveauInfo?.color} style={{ width: "100%" }}>
+          {current + 1 < questions.length ? "Question suivante →" : "Voir mes résultats"}
         </Btn>
       )}
     </div>
   );
 }
+
 
 function EntretienScreen({ onBack, onXP }) {
   const [secteur, setSecteur] = useState(null);
