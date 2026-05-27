@@ -307,12 +307,19 @@ function HomeScreen({ onNav, xp, level }) {
       <Btn onClick={() => onNav("entretien")} color={COLORS.accent3} style={{ width: "100%", marginBottom: 12 }}>
         🎤 Simuler un entretien IA
       </Btn>
-      <div onClick={() => onNav("premium")} style={{ cursor: "pointer", background: "linear-gradient(135deg, #C8622A22, #C8622A08)", border: "1px solid #C8622A55", borderRadius: 16, padding: "16px 20px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <div onClick={() => onNav("premium")} style={{ cursor: "pointer", background: "linear-gradient(135deg, #C8622A22, #C8622A08)", border: "1px solid #C8622A55", borderRadius: 16, padding: "16px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
         <div>
           <div style={{ color: "#F472B6", fontWeight: 900, fontSize: 15, marginBottom: 2 }}>⭐ Espace Expert</div>
-          <div style={{ color: COLORS.muted, fontSize: 13 }}>Le regard d'une recruteuse, pas d'une IA</div>
+          <div style={{ color: COLORS.muted, fontSize: 13 }}>Ce que les recruteurs ne te diront jamais</div>
         </div>
         <span style={{ color: "#F472B6", fontSize: 20 }}>→</span>
+      </div>
+      <div onClick={() => onNav("comparaison")} style={{ cursor: "pointer", background: "linear-gradient(135deg, #FFD70022, #FFD70008)", border: "1px solid #FFD70055", borderRadius: 16, padding: "16px 20px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div>
+          <div style={{ color: "#FFD700", fontWeight: 900, fontSize: 15, marginBottom: 2 }}>📊 Nos formules</div>
+          <div style={{ color: COLORS.muted, fontSize: 13 }}>Accès Complet 14,99€ · Suivi 29,99€/mois</div>
+        </div>
+        <span style={{ color: "#FFD700", fontSize: 20 }}>→</span>
       </div>
     </div>
   );
@@ -1229,7 +1236,7 @@ function PremiumScreen({ onBack, onXP, isPremium, onUnlock }) {
     {
       id: "suivi",
       nom: "Suivi",
-      prix: "23,99 €",
+      prix: "29,99 €",
       facturation: "/ mois",
       couleur: "#C8622A",
       badge: "Le plus complet",
@@ -2003,6 +2010,147 @@ function SimulateurCVScreen({ onBack, onXP }) {
 }
 
 
+function ComparaisonScreen({ onBack, onUnlock }) {
+  const plans = [
+    {
+      id: "complet",
+      nom: "Accès Complet",
+      icon: "💛",
+      prix: "14,99 €",
+      facturation: "paiement unique",
+      couleur: "#FFD700",
+      description: "Ce que les recruteurs ne te diront jamais — une fois pour toutes.",
+      contenu: [
+        { label: "Coulisses du recrutement", inclus: true },
+        { label: "Grilles d'évaluation recruteur", inclus: true },
+        { label: "Checklist préparation entretien par secteur", inclus: true },
+        { label: "Retour WhatsApp sur ton CV par l'experte", inclus: true },
+        { label: "Vidéos experts 1'30", inclus: false },
+        { label: "Coaching one-to-one 45 min / semaine", inclus: false },
+        { label: "Offre de bienvenue", inclus: false, note: "" },
+      ],
+      ratio: "Accès à vie — moins de 0,50 € / jour",
+      offre: "",
+    },
+    {
+      id: "suivi",
+      nom: "Suivi",
+      icon: "🟠",
+      prix: "29,99 €",
+      facturation: "/ mois",
+      couleur: "#C8622A",
+      badge: "Le plus complet",
+      description: "Un accompagnement continu avec l'experte — moins d'1 € par jour.",
+      contenu: [
+        { label: "Coulisses du recrutement", inclus: true },
+        { label: "Grilles d'évaluation recruteur", inclus: true },
+        { label: "Checklist préparation entretien par secteur", inclus: true },
+        { label: "Retour WhatsApp sur ton CV par l'experte", inclus: true },
+        { label: "Vidéos experts 1'30", inclus: true },
+        { label: "Coaching one-to-one 45 min / semaine", inclus: true },
+        { label: "Offre de bienvenue", inclus: true, note: "-10 € sur le 1er mois si tu viens du plan Accès Complet" },
+      ],
+      ratio: "Soit moins de 1 € / jour pour un accompagnement complet",
+      offre: "19,99 € le 1er mois pour les abonnés Accès Complet",
+    },
+  ];
+
+  return (
+    <div>
+      <button onClick={onBack} style={{ background: "none", border: "none", color: COLORS.muted, cursor: "pointer", fontSize: 14, marginBottom: 16, fontFamily: "inherit" }}>← Retour</button>
+      <h2 style={{ color: COLORS.accent, fontSize: 30, fontWeight: 500, fontFamily: "'Cormorant Garamond', Georgia, serif", letterSpacing: 1, marginBottom: 4 }}>📊 Nos formules</h2>
+      <p style={{ color: COLORS.muted, marginBottom: 24 }}>Choisis la formule adaptée à ta situation</p>
+
+      {/* Tableau comparatif desktop */}
+      <Card style={{ marginBottom: 20, padding: 0, overflow: "hidden" }}>
+        {/* Header */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", borderBottom: `1px solid ${COLORS.border}` }}>
+          <div style={{ padding: "16px 20px", borderRight: `1px solid ${COLORS.border}` }}>
+            <div style={{ color: COLORS.muted, fontWeight: 700, fontSize: 13, textTransform: "uppercase", letterSpacing: 1 }}>Fonctionnalités</div>
+          </div>
+          {plans.map((p, i) => (
+            <div key={p.id} style={{
+              padding: "16px 20px",
+              background: p.badge ? p.couleur + "11" : "transparent",
+              borderRight: i === 0 ? `1px solid ${COLORS.border}` : "none",
+              textAlign: "center",
+              position: "relative",
+            }}>
+              {p.badge && (
+                <div style={{ position: "absolute", top: 8, right: 8, background: p.couleur, color: "#0F0F1A", borderRadius: 99, padding: "2px 8px", fontSize: 10, fontWeight: 900 }}>{p.badge}</div>
+              )}
+              <div style={{ color: p.couleur, fontWeight: 900, fontSize: 16, fontFamily: "'Cormorant Garamond', Georgia, serif", letterSpacing: 0.5, marginBottom: 4 }}>{p.nom}</div>
+              <div style={{ color: COLORS.text, fontWeight: 900, fontSize: 20 }}>{p.prix}</div>
+              <div style={{ color: COLORS.muted, fontSize: 11 }}>{p.facturation}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Lignes */}
+        {plans[0].contenu.map((item, i) => (
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", borderBottom: i < plans[0].contenu.length - 1 ? `1px solid ${COLORS.border}` : "none" }}>
+            <div style={{ padding: "12px 20px", borderRight: `1px solid ${COLORS.border}`, display: "flex", alignItems: "center" }}>
+              <span style={{ color: COLORS.muted, fontSize: 13, lineHeight: 1.4 }}>{item.label}</span>
+            </div>
+            {plans.map((p, pi) => {
+              const cellItem = p.contenu[i];
+              return (
+                <div key={pi} style={{
+                  padding: "12px 20px",
+                  background: p.badge ? p.couleur + "08" : "transparent",
+                  borderRight: pi === 0 ? `1px solid ${COLORS.border}` : "none",
+                  textAlign: "center",
+                  display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+                }}>
+                  {cellItem.inclus ? (
+                    <div>
+                      <span style={{ color: "#00D9A3", fontWeight: 900, fontSize: 18 }}>✓</span>
+                      {cellItem.note && <div style={{ color: p.couleur, fontSize: 11, fontWeight: 700, marginTop: 4, lineHeight: 1.4 }}>{cellItem.note}</div>}
+                    </div>
+                  ) : (
+                    <span style={{ color: COLORS.border, fontSize: 18 }}>—</span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        ))}
+
+        {/* Ratio */}
+        {plans.map((p, i) => null)}
+      </Card>
+
+      {/* Ratios et CTAs */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 24 }}>
+        {plans.map(p => (
+          <Card key={p.id} style={{ borderColor: p.couleur + "44", textAlign: "center" }}>
+            <div style={{ color: p.couleur, fontWeight: 900, fontSize: 15, fontFamily: "'Cormorant Garamond', Georgia, serif", letterSpacing: 0.5, marginBottom: 6 }}>{p.nom}</div>
+            <div style={{ color: COLORS.text, fontWeight: 900, fontSize: 18, marginBottom: 2 }}>{p.prix}</div>
+            <div style={{ color: COLORS.muted, fontSize: 11, marginBottom: 10 }}>{p.facturation}</div>
+            <div style={{ background: p.couleur + "11", borderRadius: 8, padding: "6px 10px", marginBottom: 12 }}>
+              <span style={{ color: p.couleur, fontSize: 12, fontWeight: 700 }}>💡 {p.ratio}</span>
+            </div>
+            {p.offre && (
+              <div style={{ background: "#00D9A311", borderRadius: 8, padding: "6px 10px", marginBottom: 12 }}>
+                <span style={{ color: "#00D9A3", fontSize: 11, fontWeight: 700 }}>🎁 {p.offre}</span>
+              </div>
+            )}
+            <Btn onClick={onUnlock} color={p.couleur} style={{ width: "100%", fontSize: 13 }}>
+              Choisir ce plan →
+            </Btn>
+          </Card>
+        ))}
+      </div>
+
+      <Card style={{ background: "#FFD70011", borderColor: "#FFD70033" }}>
+        <p style={{ color: "#FFD700", fontSize: 13, fontWeight: 600, margin: 0, lineHeight: 1.6 }}>
+          💬 Une question sur les formules ? Contacte l'experte directement sur WhatsApp avant de t'engager.
+        </p>
+      </Card>
+    </div>
+  );
+}
+
 // ---- MAIN APP ----
 
 export default function App() {
@@ -2034,6 +2182,7 @@ export default function App() {
     salaire: <SalaireScreen onBack={() => setScreen("home")} onXP={addXP} />,
     contribution: <ContributionScreen onBack={() => setScreen("home")} onXP={addXP} />,
     premium: <PremiumScreen onBack={() => setScreen("home")} onXP={addXP} isPremium={isPremium} onUnlock={() => { setIsPremium(true); setToast("🔓 Accès Premium débloqué !"); }} />,
+    comparaison: <ComparaisonScreen onBack={() => setScreen("home")} onUnlock={() => { setIsPremium(true); setToast("🔓 Accès débloqué !"); }} />,
   };
 
   return (
