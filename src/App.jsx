@@ -256,7 +256,7 @@ function HomeScreen({ onNav, xp, level }) {
         </p>
       </Card>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 32 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 16, marginBottom: 32 }}>
         {stages.map(s => (
           <Card key={s.id} style={{ cursor: "pointer", textAlign: "center", transition: "transform 0.2s" }}
             onClick={() => onNav(s.id)}>
@@ -1952,8 +1952,8 @@ export default function App() {
       minHeight: "100vh",
       color: COLORS.text,
       fontFamily: "'Jost', 'Segoe UI', sans-serif",
-      padding: "24px 20px 80px",
-      maxWidth: 480,
+      padding: "32px 40px 80px",
+      maxWidth: 800,
       margin: "0 auto",
       position: "relative",
     }}>
