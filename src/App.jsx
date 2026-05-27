@@ -307,19 +307,12 @@ function HomeScreen({ onNav, xp, level }) {
       <Btn onClick={() => onNav("entretien")} color={COLORS.accent3} style={{ width: "100%", marginBottom: 12 }}>
         🎤 Simuler un entretien IA
       </Btn>
-      <div onClick={() => onNav("premium")} style={{ cursor: "pointer", background: "linear-gradient(135deg, #C8622A22, #C8622A08)", border: "1px solid #C8622A55", borderRadius: 16, padding: "16px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+      <div onClick={() => onNav("premium")} style={{ cursor: "pointer", background: "linear-gradient(135deg, #F472B622, #F472B608)", border: "1px solid #F472B655", borderRadius: 16, padding: "16px 20px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <div>
-          <div style={{ color: "#F472B6", fontWeight: 900, fontSize: 15, marginBottom: 2 }}>⭐ Espace Expert</div>
+          <div style={{ color: "#F472B6", fontWeight: 900, fontSize: 15, marginBottom: 2 }}>⭐ Accède à l'expertise</div>
           <div style={{ color: COLORS.muted, fontSize: 13 }}>Ce que les recruteurs ne te diront jamais</div>
         </div>
         <span style={{ color: "#F472B6", fontSize: 20 }}>→</span>
-      </div>
-      <div onClick={() => onNav("comparaison")} style={{ cursor: "pointer", background: "linear-gradient(135deg, #FFD70022, #FFD70008)", border: "1px solid #FFD70055", borderRadius: 16, padding: "16px 20px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <div>
-          <div style={{ color: "#FFD700", fontWeight: 900, fontSize: 15, marginBottom: 2 }}>📊 Nos formules</div>
-          <div style={{ color: COLORS.muted, fontSize: 13 }}>Accès Complet 14,99€ · Suivi 29,99€/mois</div>
-        </div>
-        <span style={{ color: "#FFD700", fontSize: 20 }}>→</span>
       </div>
     </div>
   );
@@ -1664,6 +1657,61 @@ function PremiumScreen({ onBack, onXP, isPremium, onUnlock }) {
               <Btn color="#FF6B35" style={{ width: "100%" }} onClick={() => {}}>Rejoindre la communauté WhatsApp →</Btn>
             </Card>
           </div>
+
+          {/* Tableau comparatif */}
+          <div style={{ marginBottom: 16 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+              <span style={{ fontSize: 20 }}>📊</span>
+              <h3 style={{ color: "#FFD700", fontWeight: 500, fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: 20, letterSpacing: 1, margin: 0 }}>Quelle formule est faite pour toi ?</h3>
+            </div>
+            <Card style={{ background: "#FFD70011", borderColor: "#FFD70033", marginBottom: 16 }}>
+              <p style={{ color: "#FFD700", fontSize: 13, fontWeight: 600, margin: 0, lineHeight: 1.6 }}>
+                Compare les deux formules pour choisir celle qui correspond le mieux à ta situation et à tes objectifs.
+              </p>
+            </Card>
+            <Card style={{ padding: 0, overflow: "hidden", marginBottom: 16 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr 1fr", borderBottom: `1px solid ${COLORS.border}` }}>
+                <div style={{ padding: "12px 14px", borderRight: `1px solid ${COLORS.border}` }}>
+                  <span style={{ color: COLORS.muted, fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1 }}>Fonctionnalité</span>
+                </div>
+                <div style={{ padding: "12px 14px", borderRight: `1px solid ${COLORS.border}`, textAlign: "center" }}>
+                  <div style={{ color: "#FFD700", fontWeight: 800, fontSize: 13 }}>💛 Accès Complet</div>
+                  <div style={{ color: COLORS.muted, fontSize: 11 }}>14,99 € unique</div>
+                </div>
+                <div style={{ padding: "12px 14px", textAlign: "center", background: "#C8622A11" }}>
+                  <div style={{ color: "#C8622A", fontWeight: 800, fontSize: 13 }}>🟠 Suivi</div>
+                  <div style={{ color: COLORS.muted, fontSize: 11 }}>29,99 € / mois</div>
+                </div>
+              </div>
+              {[
+                { label: "Coulisses du recrutement", complet: true, suivi: true },
+                { label: "Grilles d'évaluation recruteur", complet: true, suivi: true },
+                { label: "Checklist préparation entretien", complet: true, suivi: true },
+                { label: "Retour WhatsApp sur ton CV", complet: true, suivi: true },
+                { label: "Vidéos experts 1'30", complet: false, suivi: true },
+                { label: "Coaching one-to-one 45 min / semaine", complet: false, suivi: true },
+                { label: "Offre de bienvenue -10€", complet: false, suivi: true, note: "Pour les abonnés Accès Complet" },
+              ].map((row, i) => (
+                <div key={i} style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr 1fr", borderBottom: i < 6 ? `1px solid ${COLORS.border}` : "none" }}>
+                  <div style={{ padding: "10px 14px", borderRight: `1px solid ${COLORS.border}`, display: "flex", alignItems: "center" }}>
+                    <span style={{ color: COLORS.muted, fontSize: 12, lineHeight: 1.4 }}>{row.label}</span>
+                  </div>
+                  <div style={{ padding: "10px 14px", borderRight: `1px solid ${COLORS.border}`, textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <span style={{ color: row.complet ? "#00D9A3" : COLORS.border, fontWeight: 900, fontSize: 16 }}>{row.complet ? "✓" : "—"}</span>
+                  </div>
+                  <div style={{ padding: "10px 14px", textAlign: "center", background: "#C8622A08", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+                    <span style={{ color: row.suivi ? "#00D9A3" : COLORS.border, fontWeight: 900, fontSize: 16 }}>{row.suivi ? "✓" : "—"}</span>
+                    {row.note && <span style={{ color: "#C8622A", fontSize: 10, fontWeight: 700, marginTop: 2 }}>{row.note}</span>}
+                  </div>
+                </div>
+              ))}
+            </Card>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+              <Btn onClick={() => {}} color="#FFD700" style={{ fontSize: 13 }}>💛 Accès Complet — 14,99 €</Btn>
+              <Btn onClick={() => {}} color="#C8622A" style={{ fontSize: 13 }}>🟠 Suivi — 29,99 €/mois</Btn>
+            </div>
+          </div>
+
         </div>
       )}
     </div>
@@ -2181,7 +2229,7 @@ export default function App() {
     reseaux: <ReseauxScreen onBack={() => setScreen("home")} onXP={addXP} />,
     salaire: <SalaireScreen onBack={() => setScreen("home")} onXP={addXP} />,
     contribution: <ContributionScreen onBack={() => setScreen("home")} onXP={addXP} />,
-    premium: <PremiumScreen onBack={() => setScreen("home")} onXP={addXP} isPremium={isPremium} onUnlock={() => { setIsPremium(true); setToast("🔓 Accès Premium débloqué !"); }} />,
+    premium: <PremiumScreen onBack={() => setScreen("home")} onXP={addXP} isPremium={isPremium} onUnlock={() => { setIsPremium(true); setToast("🔓 Accès débloqué !"); }} />,
     comparaison: <ComparaisonScreen onBack={() => setScreen("home")} onUnlock={() => { setIsPremium(true); setToast("🔓 Accès débloqué !"); }} />,
   };
 
