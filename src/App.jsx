@@ -1221,10 +1221,8 @@ function PremiumScreen({ onBack, onXP, isPremium, onUnlock }) {
         "✦ Grilles d'évaluation — ce qu'on note vraiment sur toi en entretien",
         "✦ Quiz d'auto-évaluation exclusif — résultat détaillé et personnalisé",
         "✦ Checklist de préparation d'entretien par secteur (maintenance, production, commerce...)",
-        "✦ Communauté WhatsApp — canal conseils + groupe d'entraide (10 jours)",
-      ],
-      note: "⏱ Accès WhatsApp limité à 10 jours après activation.",
-      ratio: "Soit moins de 0,50 € / jour — et 14,99 € déduits de ton 1er mois si tu passes au plan Suivi.",
+              ],
+      ratio: "Soit moins de 0,50 € / jour pour un accès à vie.",
     },
     {
       id: "suivi",
@@ -1235,13 +1233,12 @@ function PremiumScreen({ onBack, onXP, isPremium, onUnlock }) {
       badge: "Le plus complet",
       description: "Un accompagnement régulier avec l'experte à tes côtés.",
       contenu: [
-        "✦ Tout le plan Découverte",
+        "✦ Tout le plan Accès Complet",
         "✦ Vidéos experts — format 1'30, un sujet, une clé",
-        "✦ 2 sessions collectives / mois (6-10 personnes, questions/réponses avec l'experte)",
-        "✦ Communauté WhatsApp illimitée — pendant toute la durée de l'abonnement",
+        "✦ Coaching one-to-one 45 min / semaine avec l'experte en recrutement",
       ],
-      note: "♾ Accès WhatsApp illimité pendant toute la durée de l'abonnement. Si tu viens du plan Découverte, tes 14,99 € sont déduits de ce premier mois.",
-      ratio: "Soit moins de 0,90 € / jour pour un accompagnement complet.",
+      note: "♾ Accès WhatsApp illimité pendant toute la durée de l'abonnement. Si tu viens du plan Découverte, -10 € sur le 1er mois si tu viens du plan Accès Complet.",
+      ratio: "Soit moins de 1 € / jour pour un accompagnement complet avec l'experte.",
     },
     {
       id: "coaching",
@@ -1254,7 +1251,7 @@ function PremiumScreen({ onBack, onXP, isPremium, onUnlock }) {
         "✦ Tout le plan Suivi",
         "✦ Sessions one-to-one avec un consultant certifié Mahay",
         "✦ Calls et visios à la demande — selon ta progression",
-        "✦ Travail sur ta posture, ton discours, ton vocabulaire métier",
+        "✦ Travail sur ta posture, ton discours et ton vocabulaire métier",
         "✦ Suivi personnalisé jusqu'à la signature de ton contrat",
       ],
       note: "🔒 5 places disponibles par mois — liste d'attente si complet.",
@@ -1669,44 +1666,6 @@ function PremiumScreen({ onBack, onXP, isPremium, onUnlock }) {
             </Card>
           </div>
 
-          {/* Communauté */}
-          <div style={{ marginBottom: 16 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 14 }}>
-              <span style={{ fontSize: 20 }}>💬</span>
-              <h3 style={{ color: "#FF6B35", fontWeight: 500, fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: 20, letterSpacing: 1, margin: 0 }}>Communauté privée</h3>
-            </div>
-            <Card style={{ borderColor: "#FF6B3555" }}>
-              <p style={{ color: COLORS.muted, fontSize: 14, lineHeight: 1.7, marginBottom: 20 }}>
-                La communauté Mahay Prep est accessible à tous les abonnés — dès le plan Essentiel. Deux formats complémentaires sur WhatsApp pour ne jamais chercher seul(e).
-              </p>
-
-              {/* Canal WhatsApp */}
-              <div style={{ background: "#FF6B3511", border: "1px solid #FF6B3533", borderRadius: 14, padding: "14px 16px", marginBottom: 12 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
-                  <span style={{ fontSize: 22 }}>📢</span>
-                  <span style={{ color: "#FF6B35", fontWeight: 700, fontSize: 15 }}>Canal Mahay Prep</span>
-                </div>
-                <p style={{ color: COLORS.muted, fontSize: 13, lineHeight: 1.6, margin: "0 0 4px" }}>
-                  Tu reçois directement les conseils, les coulisses du recrutement et les actualités du cabinet. Un flux de contenu exclusif, diffusé par l'experte.
-                </p>
-                <p style={{ color: COLORS.muted, fontSize: 12, fontStyle: "italic", margin: 0 }}>Format canal — tu lis, tu ne réponds pas.</p>
-              </div>
-
-              {/* Groupe WhatsApp */}
-              <div style={{ background: "#FF6B3511", border: "1px solid #FF6B3533", borderRadius: 14, padding: "14px 16px", marginBottom: 20 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
-                  <span style={{ fontSize: 22 }}>💬</span>
-                  <span style={{ color: "#FF6B35", fontWeight: 700, fontSize: 15 }}>Groupe d'entraide</span>
-                </div>
-                <p style={{ color: COLORS.muted, fontSize: 13, lineHeight: 1.6, margin: "0 0 4px" }}>
-                  Un groupe privé entre membres premium pour partager tes retours d'entretiens, poser tes questions et avancer entouré(e). L'experte intervient régulièrement.
-                </p>
-                <p style={{ color: COLORS.muted, fontSize: 12, fontStyle: "italic", margin: 0 }}>Accessible dès le plan Essentiel — sur validation.</p>
-              </div>
-
-              <Btn color="#FF6B35" style={{ width: "100%" }} onClick={() => {}}>Rejoindre la communauté WhatsApp →</Btn>
-            </Card>
-          </div>
 
           {/* Tableau comparatif */}
           <div style={{ marginBottom: 16 }}>
